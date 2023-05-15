@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:22:32 by ale-sain          #+#    #+#             */
-/*   Updated: 2023/05/15 18:16:53 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/15 19:10:44 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	init_map(t_game *game)
 void	init_color(t_game *game)
 {
 	game->color_ceil = convert_hexa_color(game->info_map->ceil_color[0],
-							game->info_map->ceil_color[1], game->info_map->ceil_color[2]);
+			game->info_map->ceil_color[1], game->info_map->ceil_color[2]);
 	game->color_floor = convert_hexa_color(game->info_map->floor_color[0],
-							game->info_map->floor_color[1], game->info_map->floor_color[2]);
+			game->info_map->floor_color[1], game->info_map->floor_color[2]);
 }

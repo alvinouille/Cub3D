@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 00:34:42 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/15 18:09:35 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/15 19:19:19 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	size_of_map(t_game *game)
 
 int	set_line(t_game *game, char **line, int y)
 {
-	int	i;
+	int		i;
 	char	c;
 
 	i = -1;
