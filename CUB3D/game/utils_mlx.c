@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:03:50 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/14 16:40:58 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:37:48 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 int	close_x(t_game *game)
 {
-	fprintf(stderr, "FIN DU JEUX AVEC LA CROIX\n");
+	fprintf(stderr, "Did you have fun ?\n");
 	mlx_loop_end(game->mlx);
-	exit (0);
+	cleaner(game, 0);
 	return (1);
 }
 
-void	modify(t_game *game)
+static void	sizing(t_game *game)
 {
-	char	**tab;
-	int		i;
-	int		size;
+	int	i;
+	int	j;
+	int	size;
 
 	size = 0;
 	i = 0;
-	int j = 0;
-	tab = NULL;
+	j = 0;
 	while (game->tab[i])
 	{
 		while (game->tab[i][j])
@@ -41,8 +40,13 @@ void	modify(t_game *game)
 	}
 	game->map_size[0] = i - 1;
 	game->map_size[1] = size - 1;
-	i = 1;
-	j = 1;
+}
+
+void	modify(t_game *game, int i, int j)
+{
+	char	**tab;
+
+	sizing(game);
 	tab = malloc((sizeof(char *) * (game->map_size[0] + 1)));
 	free(game->tab[0]);
 	while (i < (int)game->map_size[0])
@@ -64,10 +68,53 @@ void	modify(t_game *game)
 	free(game->tab[i]);
 	tab[i - 1] = NULL;
 	free(game->tab);
-	i = 0;
-	j = 0;
-	// while (tab[i])
-	// 	printf("%s \n", tab[i++]);
 	game->tab = tab;
-	printf("height : %d, length : %d \n", game->map_size[0], game->map_size[1]);
+}
+
+void	seeing_in_the_futur_bro(int key_symbole, t_game *game, int speed)
+{
+	if (key_symbole == W)
+	{
+		game->next_next_pos.y = game->next_pos.y - (game->pd.y * speed);
+		game->next_next_pos.x = game->next_pos.x - (game->pd.x * speed);
+	}
+	if (key_symbole == S)
+	{
+		game->next_next_pos.y = game->next_pos.y + (game->pd.y * speed);
+		game->next_next_pos.x = game->next_pos.x + (game->pd.x * speed);
+	}
+	if (key_symbole == A)
+	{
+		game->next_next_pos.x = game->next_pos.x - (game->pd.y * speed);
+		game->next_next_pos.y = game->next_pos.y + (game->pd.x * speed);
+	}
+	if (key_symbole == D)
+	{
+		game->next_next_pos.x = game->next_pos.x + (game->pd.y * speed);
+		game->next_next_pos.y = game->next_pos.y - (game->pd.x * speed);
+	}
+}
+
+void	setting_next_pos(int key_symbole, t_game *game, int speed)
+{
+	if (key_symbole == W)
+	{
+		game->next_pos.y -= (game->pd.y * speed);
+		game->next_pos.x -= (game->pd.x * speed);
+	}
+	if (key_symbole == S)
+	{
+		game->next_pos.y += (game->pd.y * speed);
+		game->next_pos.x += (game->pd.x * speed);
+	}
+	if (key_symbole == A)
+	{
+		game->next_pos.x -= (game->pd.y * speed);
+		game->next_pos.y += (game->pd.x * speed);
+	}
+	if (key_symbole == D)
+	{
+		game->next_pos.x += (game->pd.y * speed);
+		game->next_pos.y -= (game->pd.x * speed);
+	}
 }

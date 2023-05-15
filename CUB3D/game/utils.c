@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:25:56 by ale-sain          #+#    #+#             */
-/*   Updated: 2023/05/14 16:06:36 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:27:00 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	is_wall(t_game *game, t_moh2f pos)
 	int	x;
 	int	y;
 
-	x = (int)pos.x / SIZE;
-	y = (int)pos.y / SIZE;
-	if (game->tab[y][x] == '1')
+	x = (int)(pos.x / SIZE);
+	y = (int)(pos.y / SIZE);
+	if (game->tab[y][x] == '1' || game->tab[y][x] == 'X')
 		return (1);
 	else
 		return (0);

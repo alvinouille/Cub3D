@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 00:34:42 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/14 16:39:46 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/15 18:09:35 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	size_of_map(t_game *game)
 
 int	set_line(t_game *game, char **line, int y)
 {
-	int		i;
+	int	i;
 	char	c;
 
 	i = -1;
@@ -104,10 +104,10 @@ int	set_line(t_game *game, char **line, int y)
 
 int	set_limiter(char **line, size_t len)
 {
-	int		i;
+	size_t	i;
 
 	i = -1;
-	while (++i < (int)len)
+	while (++i < len)
 	{
 		*line = ft_strjoin(*line, "X");
 		if (*line == NULL)

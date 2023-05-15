@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:34:49 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/14 16:38:13 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/15 18:17:27 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	check_map_border(t_game *game)
 {
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	y = -1;
 	while (game->tab[++y])
@@ -33,7 +33,7 @@ static int	check_map_border(t_game *game)
 	return (SUCCESS);
 }
 
-static int	check_map_content(t_game *game, size_t y, size_t x, size_t pos)
+static int	check_map_content(t_game *game, int y, int x, int pos)
 {
 	static char	tab[4] = {NORTH, SOUTH, EAST, WEST};
 
@@ -63,7 +63,7 @@ static int	check_map_content(t_game *game, size_t y, size_t x, size_t pos)
 
 int	map_to_square(t_game *game)
 {
-	int		y;
+	int	y;
 	char	**new_map;
 
 	new_map = ft_calloc(game->map_size[HEIGHT] + 3, sizeof(char *));
@@ -98,9 +98,7 @@ int	check_map(t_game *game, t_info_map *info)
 		return (ft_free(info->map_info, 0), info->error = MAP_ERROR, FAILURE);
 	if (!map_to_square(game))
 		return (info->error = MALLOC_ERROR, FAILURE);
-	// display(game->map);
-	// display_all(game->info_map->map_info, game->map);
-	// display(game->map);
+	// display_all(game->info_map->map_info, game->tab);
 	if (!check_map_border(game))
 		return (ft_free(info->map_info, 0), info->error = MAP_ERROR, FAILURE);
 	return (SUCCESS);
@@ -113,7 +111,7 @@ int	get_map(const char *map_name, t_game *game, t_info_map *info)
 	if (!check_map(game, info))
 		return (FAILURE);
 	// ft_free(info->map_info, 0);
-	// ft_free(game->map, 1);
+	// ft_free(game->tab, 1);
 	// ft_free(info->texture, 0);
 	// get_next_line(FREE_SR_GNL, 1);
 	return (SUCCESS);

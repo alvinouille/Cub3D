@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:08:03 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/14 17:00:09 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:49:58 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,29 @@
 
 void	deplacement_key(int key_symbole, t_game *game)
 {
-	t_moh2f	next_pos;
-
-	next_pos = game->player_pos;
+	game->next_pos = game->player_pos;
 	if (key_symbole == W)
 	{
-		next_pos.y -= (game->pd.y * 5);
-		next_pos.x -= (game->pd.x * 5);
+		setting_next_pos(key_symbole, game, 5);
+		seeing_in_the_futur_bro(key_symbole, game, 5);
 	}
 	if (key_symbole == S)
 	{
-		next_pos.y += (game->pd.y * 5);
-		next_pos.x += (game->pd.x * 5);
+		setting_next_pos(key_symbole, game, 5);
+		seeing_in_the_futur_bro(key_symbole, game, 5);
 	}
 	if (key_symbole == A)
 	{
-		next_pos.x -= (game->pd.y * 5);
-		next_pos.y += (game->pd.x * 5);
+		setting_next_pos(key_symbole, game, 5);
+		seeing_in_the_futur_bro(key_symbole, game, 5);
 	}
 	if (key_symbole == D)
 	{
-		next_pos.x += (game->pd.y * 5);
-		next_pos.y -= (game->pd.x * 5);
+		setting_next_pos(key_symbole, game, 5);
+		seeing_in_the_futur_bro(key_symbole, game, 5);
 	}
-	if (!is_wall(game, next_pos))
-		game->player_pos = next_pos;
+	if (!is_wall(game, game->next_next_pos))
+		game->player_pos = game->next_pos;
 }
 
 int	deal_key(int key_symbole, t_game *game)
@@ -93,20 +91,21 @@ void	mlx(t_game *game)
 	game->img.img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!game->img.img)
 		cleaner(game, 3);
-	game->img.addr = mlx_get_data_addr(game->img.img, &(game->img.bits_per_pixel),
-			&(game->img.line_length), &(game->img.endian));
+	game->img.addr = mlx_get_data_addr(game->img.img,
+			&(game->img.bits_per_pixel), &(game->img.line_length),
+			&(game->img.endian));
 	mlx_loop_hook(game->mlx, display_, game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, &deal_key, game);
-	mlx_hook(game->win, 17, (1L << 17), &close_x, &game);
+	mlx_hook(game->win, 17, (1L << 17), &close_x, game);
 	mlx_loop(game->mlx);
 }
 
 int	blood_link(t_game *game)
 {
-	modify(game);
+	modify(game, 1, 1);
+	init(game);
 	init_player(game, 0, 0);
 	init_map(game);
-	init(game);
 	init_color(game);
 	mlx(game);
 	return (SUCCESS);

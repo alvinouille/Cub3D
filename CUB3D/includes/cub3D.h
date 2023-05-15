@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:34:22 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/14 17:03:21 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:38:25 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ typedef struct s_game
 	double		pa;
 	int			map_size[2];
 	t_moh2f		player_pos;
+	t_moh2f		next_pos;
+	t_moh2f		next_next_pos;
 	t_moh2f		pd;
 	t_info_map	*info_map;
 	int		color_floor;
@@ -314,7 +316,9 @@ int			convert_hexa_color(int red, int green, int blue);
 
 					/*	UTILS_MLX.C	*/
 int			close_x(t_game *game);
-void		modify(t_game *game);
+void		modify(t_game *game, int i, int j);
+void		setting_next_pos(int key_symbole, t_game *game, int speed);
+void		seeing_in_the_futur_bro(int key_symbole, t_game *game, int speed);
 
 /************ TMP UTILS NEED TO DELETE **************/
 void	display(char **map);
