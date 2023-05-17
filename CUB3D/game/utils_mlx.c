@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:03:50 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/15 17:37:48 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:14:00 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ void	modify(t_game *game, int i, int j)
 
 	sizing(game);
 	tab = malloc((sizeof(char *) * (game->map_size[0] + 1)));
-	free(game->tab[0]);
-	while (i < (int)game->map_size[0])
+	if (!tab)
+		cleaner(game, MALLOC_ERROR);
+	while (++i < (int)game->map_size[0])
 	{
 		tab[i - 1] = malloc(sizeof(char) * game->map_size[1]);
+		if (!tab[i - 1])
+			return (tab_clean(tab, i - 1), cleaner(game, MALLOC_ERROR));
 		while (j < (int)game->map_size[1] - 1)
 		{
 			if (game->tab[i][j] == '\0' || game->tab[i][j] == ' ')
@@ -60,14 +63,11 @@ void	modify(t_game *game, int i, int j)
 				tab[i - 1][j - 1] = game->tab[i][j];
 			j++;
 		}
-		free(game->tab[i]);
 		tab[i - 1][j - 1] = 0;
 		j = 1;
-		i++;
 	}
-	free(game->tab[i]);
 	tab[i - 1] = NULL;
-	free(game->tab);
+	tab_clean(game->tab, (int)game->map_size[0] + 1);
 	game->tab = tab;
 }
 

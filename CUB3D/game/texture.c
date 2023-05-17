@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:27:50 by ale-sain          #+#    #+#             */
-/*   Updated: 2023/05/15 17:27:52 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:06:43 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@ void	init_texture(t_game *game)
 			game->info_map->texture[NO], &(game->texture[NO].width),
 			&(game->texture[NO].height));
 	if (!game->texture[NO].img.img)
-		cleaner(game, 3);
+		cleaner(game, MLX_ERROR);
 	game->texture[1].img.img = mlx_xpm_file_to_image(game->mlx,
 			game->info_map->texture[1], &(game->texture[1].width),
 			&(game->texture[1].height));
 	if (!game->texture[1].img.img)
-		cleaner(game, 3);
+		cleaner(game, MLX_ERROR);
 	game->texture[2].img.img = mlx_xpm_file_to_image(game->mlx,
 			game->info_map->texture[2], &(game->texture[2].width),
 			&(game->texture[2].height));
 	if (!game->texture[2].img.img)
-		cleaner(game, 3);
+		cleaner(game, MLX_ERROR);
 	game->texture[3].img.img = mlx_xpm_file_to_image(game->mlx,
 			game->info_map->texture[3], &(game->texture[3].width),
 			&(game->texture[3].height));
 	if (!game->texture[3].img.img)
-		cleaner(game, 3);
+		cleaner(game, MLX_ERROR);
 	init_adr_texture(game);
 }
 

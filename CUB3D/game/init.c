@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:22:32 by ale-sain          #+#    #+#             */
-/*   Updated: 2023/05/15 19:10:44 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:06:14 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,7 @@ void	init_map(t_game *game)
 	game->map.size = game->map.length * game->map.height;
 	if (game->map.height * (SIZE / 20) >= W_HEIGHT || game->map.length * (SIZE
 			/ 20) >= W_WIDTH)
-	{
-		printf("MAP TROP GRANDE!\n");
-		cleaner(game, 0);
-	}
+		cleaner(game, MAP_ERROR);
 }
 
 void	init_color(t_game *game)

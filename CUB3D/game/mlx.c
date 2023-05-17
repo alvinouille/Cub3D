@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:08:03 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/15 17:49:58 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:03:49 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	mlx(t_game *game)
 
 int	blood_link(t_game *game)
 {
-	modify(game, 1, 1);
 	init(game);
+	modify(game, 0, 1);
 	init_player(game, 0, 0);
 	init_map(game);
 	init_color(game);

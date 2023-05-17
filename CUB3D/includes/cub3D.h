@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:34:22 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/15 19:24:33 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:59:49 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ void			simply_line(t_game *game, t_moh2i start, t_moh2i end,
 
 /*	TRASH.C	*/
 void			cleaner(t_game *game, int code);
+void			tab_clean(char **tab, int size);
 
 /*	TEXTURE.C */
 void			init_texture(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:17:26 by alvina            #+#    #+#             */
-/*   Updated: 2023/05/15 16:41:14 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:08:41 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,24 @@ void	cleaner(t_game *game, int code)
 	img_destroyer(game);
 	ft_free(game->info_map->map_info, 0);
 	ft_free(game->info_map->texture, 0);
-	if (code == 3)
-		printf("MLX FAILED : Did you try to fool me ?\n");
+	if (code == MLX_ERROR)
+		ft_putstr_fd("MLX FAILED : Did you try to fool me ?\n", 2);
+	if (code == MALLOC_ERROR)
+		ft_putstr_fd("MALLOC FAILED : too bad . . . \n", 2);
+	if (code == MAP_ERROR)
+		ft_putstr_fd("MAP FAILED : You tried a too big map !\n", 2);
 	exit(code);
+}
+
+void	tab_clean(char **tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
