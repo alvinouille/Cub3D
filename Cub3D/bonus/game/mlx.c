@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:08:03 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/18 13:39:43 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/18 15:49:01 by ale-sain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static void exec_move(t_game *game, int c)
+static void	exec_move(t_game *game, int c)
 {
 	int	speed;
 
@@ -81,8 +81,6 @@ void	mlx(t_game *game)
 	game->img.addr = mlx_get_data_addr(game->img.img,
 			&(game->img.bits_per_pixel), &(game->img.line_length),
 			&(game->img.endian));
-	// mlx_loop_hook(game->mlx, display_, game);
-	// game->next_pos = game->player_pos;
 	mlx_hook(game->win, KeyRelease, KeyReleaseMask, &release_key, game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, &press_key, game);
 	mlx_hook(game->win, 17, (1L << 17), &close_x, game);
