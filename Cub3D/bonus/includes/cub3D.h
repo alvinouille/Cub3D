@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale-sain <ale-sain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:34:22 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/17 19:57:47 by ale-sain         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:23:48 by alvina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,14 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			press_w;
+	int			press_a;
+	int			press_s;
+	int			press_d;
+	int			press_left;
+	int			press_right;
+	// float		accelerator;
+	// int			count;
 	double		planex;
 	double		planey;
 	t_moh2f		player_pos_f;

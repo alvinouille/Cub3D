@@ -3,53 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:08:03 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/17 17:19:02 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:23:54 by alvina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	deplacement_key(int key_symbole, t_game *game)
+void exec_move(t_game *game, int c)
 {
 	game->next_pos = game->player_pos;
-	if (key_symbole == W)
-	{
-		setting_next_pos(key_symbole, game, 5);
-		seeing_in_the_futur_bro(key_symbole, game, 5);
-	}
-	if (key_symbole == S)
-	{
-		setting_next_pos(key_symbole, game, 5);
-		seeing_in_the_futur_bro(key_symbole, game, 5);
-	}
-	if (key_symbole == A)
-	{
-		setting_next_pos(key_symbole, game, 5);
-		seeing_in_the_futur_bro(key_symbole, game, 5);
-	}
-	if (key_symbole == D)
-	{
-		setting_next_pos(key_symbole, game, 5);
-		seeing_in_the_futur_bro(key_symbole, game, 5);
-	}
+	setting_next_pos(c, game, 2);
+	seeing_in_the_futur_bro(c, game, 5);
 	if (!is_wall(game, game->next_next_pos))
 		game->player_pos = game->next_pos;
+	// else
+	// 	printf("wall : y : %f, x : %f\n", game->next_pos.y, game->next_pos.x);
 }
 
-int	deal_key(int key_symbole, t_game *game)
+int	move(t_game *game)
 {
-	if (key_symbole == XK_Escape)
-	{
-		mlx_loop_end(game->mlx);
-		cleaner(game, 0);
-	}
-	if (key_symbole == W || key_symbole == A || key_symbole == S
-		|| key_symbole == D)
-		deplacement_key(key_symbole, game);
-	if (key_symbole == LEFT)
+	if (game->press_w == 1)
+		exec_move(game, W);
+	if (game->press_s == 1)
+		exec_move(game, S);
+	if (game->press_a == 1)
+		exec_move(game, A);
+	if (game->press_d == 1)
+		exec_move(game, D);
+	if (game->press_left == 1)
 	{
 		game->pa -= 0.1;
 		if (game->pa < 0)
@@ -57,7 +41,7 @@ int	deal_key(int key_symbole, t_game *game)
 		game->pd.x = (cos(game->pa)) * 5;
 		game->pd.y = (sin(game->pa)) * 5;
 	}
-	if (key_symbole == RIGHT)
+	if (game->press_right == 1)
 	{
 		game->pa += 0.1;
 		if (game->pa >= (2 * PI))
@@ -65,6 +49,46 @@ int	deal_key(int key_symbole, t_game *game)
 		game->pd.x = cos(game->pa) * 5;
 		game->pd.y = sin(game->pa) * 5;
 	}
+	display_(game);
+	return (0);
+}
+
+int	release_key(int key_symbole, t_game *game)
+{
+	if (key_symbole == W)
+		game->press_w = 2;
+	if (key_symbole == S)
+		game->press_s = 2;
+	if (key_symbole == D)
+		game->press_d = 2;
+	if (key_symbole == A)
+		game->press_a = 2;
+	if (key_symbole == LEFT)
+		game->press_left = 2;
+	if (key_symbole == RIGHT)
+		game->press_right = 2;
+	return (0);
+}
+
+int	press_key(int key_symbole, t_game *game)
+{
+	if (key_symbole == XK_Escape)
+	{
+		mlx_loop_end(game->mlx);
+		cleaner(game, 0);
+	}
+	if (key_symbole == W)
+		game->press_w = 1;
+	if (key_symbole == S)
+		game->press_s = 1;
+	if (key_symbole == D)
+		game->press_d = 1;
+	if (key_symbole == A)
+		game->press_a = 1;
+	if (key_symbole == LEFT)
+		game->press_left = 1;
+	if (key_symbole == RIGHT)
+		game->press_right = 1;
 	return (0);
 }
 
@@ -94,9 +118,12 @@ void	mlx(t_game *game)
 	game->img.addr = mlx_get_data_addr(game->img.img,
 			&(game->img.bits_per_pixel), &(game->img.line_length),
 			&(game->img.endian));
-	mlx_loop_hook(game->mlx, display_, game);
-	mlx_hook(game->win, KeyPress, KeyPressMask, &deal_key, game);
+	// mlx_loop_hook(game->mlx, display_, game);
+	// game->next_pos = game->player_pos;
+	mlx_hook(game->win, KeyRelease, KeyReleaseMask, &release_key, game);
+	mlx_hook(game->win, KeyPress, KeyPressMask, &press_key, game);
 	mlx_hook(game->win, 17, (1L << 17), &close_x, game);
+	mlx_loop_hook(game->mlx, move, game);
 	mlx_loop(game->mlx);
 }
 

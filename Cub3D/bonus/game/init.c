@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:22:32 by ale-sain          #+#    #+#             */
-/*   Updated: 2023/05/17 17:18:25 by mmourdal         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:01:59 by alvina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	init(t_game *game)
 	game->win = NULL;
 	game->img.img = NULL;
 	game->mlx = NULL;
+	game->press_w = 2;
+	game->press_a = 2;
+	game->press_s = 2;
+	game->press_d = 2;
+	game->press_left = 2;
+	game->press_right = 2;
 }
 
 void	init_player_orientation(t_game *game, int i, int j)
