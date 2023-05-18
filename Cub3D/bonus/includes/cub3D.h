@@ -6,7 +6,7 @@
 /*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:34:22 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/18 12:23:48 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/18 13:39:24 by alvina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 # define S 115
 # define LEFT 65361
 # define RIGHT 65363
+# define MAJ 65505
 
 # define PI 3.14159265
 # define P2 1.570796327
@@ -152,8 +153,7 @@ typedef struct s_game
 	int			press_d;
 	int			press_left;
 	int			press_right;
-	// float		accelerator;
-	// int			count;
+	int			press_maj;
 	double		planex;
 	double		planey;
 	t_moh2f		player_pos_f;
@@ -330,5 +330,7 @@ void			modify(t_game *game, int i, int j);
 void			setting_next_pos(int key_symbole, t_game *game, int speed);
 void			seeing_in_the_futur_bro(int key_symbole, t_game *game,
 					int speed);
+int				release_key(int key_symbole, t_game *game);
+int				press_key(int key_symbole, t_game *game);
 
 #endif

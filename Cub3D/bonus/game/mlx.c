@@ -6,24 +6,27 @@
 /*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:08:03 by mmourdal          #+#    #+#             */
-/*   Updated: 2023/05/18 12:23:54 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/18 13:39:43 by alvina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void exec_move(t_game *game, int c)
+static void exec_move(t_game *game, int c)
 {
+	int	speed;
+
+	speed = 2;
+	if (c == W && game->press_maj == 1)
+		speed = 4;
 	game->next_pos = game->player_pos;
-	setting_next_pos(c, game, 2);
-	seeing_in_the_futur_bro(c, game, 5);
+	setting_next_pos(c, game, speed);
+	seeing_in_the_futur_bro(c, game, speed + 3);
 	if (!is_wall(game, game->next_next_pos))
 		game->player_pos = game->next_pos;
-	// else
-	// 	printf("wall : y : %f, x : %f\n", game->next_pos.y, game->next_pos.x);
 }
 
-int	move(t_game *game)
+static int	move(t_game *game)
 {
 	if (game->press_w == 1)
 		exec_move(game, W);
@@ -35,7 +38,7 @@ int	move(t_game *game)
 		exec_move(game, D);
 	if (game->press_left == 1)
 	{
-		game->pa -= 0.1;
+		game->pa -= 0.05;
 		if (game->pa < 0)
 			game->pa += (2 * PI);
 		game->pd.x = (cos(game->pa)) * 5;
@@ -43,53 +46,13 @@ int	move(t_game *game)
 	}
 	if (game->press_right == 1)
 	{
-		game->pa += 0.1;
+		game->pa += 0.05;
 		if (game->pa >= (2 * PI))
 			game->pa -= 2 * PI;
 		game->pd.x = cos(game->pa) * 5;
 		game->pd.y = sin(game->pa) * 5;
 	}
-	display_(game);
-	return (0);
-}
-
-int	release_key(int key_symbole, t_game *game)
-{
-	if (key_symbole == W)
-		game->press_w = 2;
-	if (key_symbole == S)
-		game->press_s = 2;
-	if (key_symbole == D)
-		game->press_d = 2;
-	if (key_symbole == A)
-		game->press_a = 2;
-	if (key_symbole == LEFT)
-		game->press_left = 2;
-	if (key_symbole == RIGHT)
-		game->press_right = 2;
-	return (0);
-}
-
-int	press_key(int key_symbole, t_game *game)
-{
-	if (key_symbole == XK_Escape)
-	{
-		mlx_loop_end(game->mlx);
-		cleaner(game, 0);
-	}
-	if (key_symbole == W)
-		game->press_w = 1;
-	if (key_symbole == S)
-		game->press_s = 1;
-	if (key_symbole == D)
-		game->press_d = 1;
-	if (key_symbole == A)
-		game->press_a = 1;
-	if (key_symbole == LEFT)
-		game->press_left = 1;
-	if (key_symbole == RIGHT)
-		game->press_right = 1;
-	return (0);
+	return (display_(game), 0);
 }
 
 int	display_(t_game *game)

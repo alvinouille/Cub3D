@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmourdal <mmourdal@student.42.fr>          +#+  +:+       +#+         #
+#    By: alvina <alvina@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/02 17:59:57 by mmourdal          #+#    #+#              #
-#    Updated: 2023/05/17 21:47:50 by mmourdal         ###   ########.fr        #
+#    Updated: 2023/05/18 13:40:58 by alvina           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC_FILES_BONUS = $(addprefix bonus/parse/, \
 				free.c) \
 				$(addprefix bonus/game/, \
 				mlx.c  init.c brasenham.c brasenham2.c brasenham3.c draw_minimap.c raycast_utils.c raycasting.c texture.c \
-				trash.c utils.c utils_mlx.c) \
+				trash.c utils.c utils2_mlx.c utils_mlx.c) \
 				bonus/main_bonus.c \
 
 ################################################################################

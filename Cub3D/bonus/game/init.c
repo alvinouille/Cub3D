@@ -6,7 +6,7 @@
 /*   By: alvina <alvina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:22:32 by ale-sain          #+#    #+#             */
-/*   Updated: 2023/05/18 12:01:59 by alvina           ###   ########.fr       */
+/*   Updated: 2023/05/18 13:30:36 by alvina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init(t_game *game)
 	game->press_d = 2;
 	game->press_left = 2;
 	game->press_right = 2;
+	game->press_maj = 2;
 }
 
 void	init_player_orientation(t_game *game, int i, int j)
